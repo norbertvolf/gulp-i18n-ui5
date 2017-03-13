@@ -42,7 +42,7 @@ function setup(options) {
 			pattern: "\\{\\{([^}]+)\\}\\}"
 		}, {
 			fileExtensions: ["js"],
-			pattern: "getText\\([\"']([^\"']+)[\"']"
+			pattern: "(?:getText|__)\\([\"']([^\"']+)[\"']"
 		}],
 		output: {
 			fileName: "webapp/i18n/i18n.properties",
@@ -208,7 +208,7 @@ function i18n(options) {
 				log('APPEND token ' + gutil.colors.cyan(token));
 				return {
 					type: TOKEN.ACTIVE,
-					line: token + "=" + token2Message(token),
+					line: "\n#XTIT\n" + token + "=" + token2Message(token),
 					name: token,
 					value: token
 				};
@@ -257,9 +257,17 @@ function i18n(options) {
 	 * @return {String} converted message
 	 */
 	function token2Message(token) {
-		return token.replace(/([a-z])([A-Z])/g, function(match, p1, p2) {
-			return p1 + " " + p2.toLowerCase();
-		});
+		var message = token;
+		if ( token.toUpperCase() === token ) {
+			message = token.split("_").join(" ")
+			message = message.charAt(0).toUpperCase() + message.slice(1).toLowerCase();
+			console.log(message);
+		} else {
+			message = token.replace(/([a-z])([A-Z])/g, function(match, p1, p2) {
+				return p1 + " " + p2.toLowerCase();
+			});
+		}
+		return message;
 	}
 
 	return through.obj(bufferContents, endStream);
