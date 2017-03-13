@@ -37,6 +37,8 @@ Just import plugin to gulp file and use it.
  * output.fileName - name of file with translation messages
  * output.pattern - pattern which define translation line
 
+Example with advanced configuration 
+
 	var i18n = require("gulp-i18n");
 	var configuration = {
 		patterns: [{
