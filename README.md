@@ -6,7 +6,7 @@ The plugin In default configuration searches patterns:
 
   * \_\_("MSGID")
   * getText("MSGID")
-  * "{i18n&gl;MSGID}"
+  * "{i18n&gt;MSGID}"
 
 Then activate/deactivate and add messages to i18n/i18n.properties
 file which is used for the translations in Fiory projects.
@@ -36,6 +36,8 @@ Just import plugin to gulp file and use it.
  * output - definiton of output file
  * output.fileName - name of file with translation messages
  * output.pattern - pattern which define translation line
+
+Example with advanced configuration 
 
 	var i18n = require("gulp-i18n");
 	var configuration = {
