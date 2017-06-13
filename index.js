@@ -42,7 +42,10 @@ function setup(options) {
 			pattern: "\\{\\{([^}]+)\\}\\}"
 		}, {
 			fileExtensions: ["js"],
-			pattern: "(?:getText|__)\\([\"']([^\"']+)[\"']"
+			pattern: [
+				"(?:getText|__)\\([\"']([^\"']+)[\"']",,
+				"(?:nGetText)\\([\"']([^\"']+)[\"'], *[\"']([^\"']+)[\"']"
+			]
 		}],
 		output: {
 			fileName: "webapp/i18n/i18n.properties",
@@ -91,7 +94,8 @@ function i18n(options) {
 	 * @return {void}
 	 */
 	function bufferContents(file, options, cb) {
-		var pattern;
+		var patternDefinition;
+		var patterns;
 
 		if (file.isNull()) { // ignore empty files
 			cb();
@@ -100,14 +104,15 @@ function i18n(options) {
 			cb();
 			return;
 		} else {
-			pattern = findPattern(file.path);
-			if (pattern) {
-				i18nTokens = _.chain(file.contents.toString().match(new RegExp(pattern, "gm")))
-					.map(function(matchedString) {
-						return (new RegExp(pattern)).exec(matchedString.toString())[1];
-					})
-					.concat(i18nTokens)
-					.value();
+			patternDefinition = findPattern(file.path);
+			if (patternDefinition) {
+				patterns =  _.isArray(patternDefinition) ? patternDefinition : [patternDefinition];
+				patterns.forEach(function(pattern) {
+					var matches = file.contents.toString().match(new RegExp(pattern, "gm"));
+					(matches || []).forEach(function(matchedString) {
+						i18nTokens = i18nTokens.concat((new RegExp(pattern)).exec(matchedString.toString()).slice(1));
+					});
+				});
 			}
 			cb();
 		}
