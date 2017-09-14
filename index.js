@@ -209,7 +209,9 @@ function i18n(options) {
 				return _.find(i18nPropertiesFileTokens, function(v) {
 					return (v.type === TOKEN.ACTIVE || v.type === TOKEN.INACTIVE) && v.name === token;
 				}) === undefined;
-			}).map(function(token) {
+			})
+			.uniqWith(_.isEqual)
+			.map(function(token) {
 				log('APPEND token ' + gutil.colors.cyan(token));
 				return {
 					type: TOKEN.ACTIVE,
