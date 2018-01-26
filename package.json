@@ -1,16 +1,30 @@
 {
-  "name": "gulp-i18n",
+  "name": "gulp-i18n-ui5",
   "version": "1.0.0",
-  "description": "",
+  "description": "The plugin is used for simplify work with translations in OpenUI5 or SAPUI5 framework.  The plugin searches views and source code of project in OpenUI5 or SAPUI5 framework for translation tokens and automatically update translation file used by the framework.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Norbert Volf",
+  "license": "MIT",
   "dependencies": {
     "gulp-util": "^3.0.8",
     "lodash": "^4.17.4",
     "through2": "^2.0.3"
-  }
+  },
+  "devDependencies": {},
+  "keywords": [
+    "SAPUI5",
+    "OpenUI5",
+    "i18n"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norbertvolf/gulp-i18n-ui5.git"
+  },
+  "bugs": {
+    "url": "https://github.com/norbertvolf/gulp-i18n-ui5/issues"
+  },
+  "homepage": "https://github.com/norbertvolf/gulp-i18n-ui5#readme"
 }

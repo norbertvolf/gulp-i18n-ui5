@@ -1,33 +1,40 @@
-#Plugin Gulp-i18n
+# Plugin gulp-i18n-ui5
 
-This is gulp-plugin which searches views and sourcode for translations.
+The plugin is used for simplify work with translations in OpenUI5 or SAPUI5
+framework.  The plugin searches views and source code of project in
+OpenUI5 or SAPUI5 framework for translation tokens and automatically update
+translation file used by the framework.
 
-The plugin In default configuration searches patterns:
+The plugin searches patterns:
 
   * \_\_("MSGID")
   * getText("MSGID")
   * "{i18n&gt;MSGID}"
 
-Then activate/deactivate and add messages to i18n/i18n.properties
-file which is used for the translations in Fiory projects.
+in default configuration.  Then activate/deactivate/add messages in/to
+`i18n.properties` file which is used for the translations.
 
-#Install
+## Install
 
-	npm install --save-dev git+ssh://git@github.wdf.sap.corp:I332698/gulp-18n.git
+```
+	npm install gulp-18n-ui5.git
+```
 
-#Usage
+## Usage
 
 Just import plugin to gulp file and use it.
 
-	var i18n = require("gulp-i18n");
+```
+	var i18n = require("gulp-i18n-ui5");
 
 	var translationFiles = ["webapp/**/*.js", "webapp/manifest.json", "webapp/view/**/*.xml"];
 
 	return gulp.src(translationFiles)
 		.pipe(i18n("webapp/i18n/i18n.properties"))
 		.pipe(gulp.dest("./"));
+```
 
-#Advanced configuration
+## Advanced configuration
 
  * noDeactivateTokens - Tokens which is not deactivated when does not exits in source code workaround for dynamically used translations
  * patterns - array of patterns used to search trnanslaton messagees
@@ -37,8 +44,9 @@ Just import plugin to gulp file and use it.
  * output.fileName - name of file with translation messages
  * output.pattern - pattern which define translation line
 
-Example with advanced configuration 
+Example with advanced configuration
 
+```
 	var i18n = require("gulp-i18n");
 	var configuration = {
 		patterns: [{
@@ -64,3 +72,4 @@ Example with advanced configuration
 		.pipe(i18n("webapp/i18n/i18n.properties"))
 		.pipe(gulp.dest("./"));
 
+```
