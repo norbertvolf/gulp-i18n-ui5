@@ -25,13 +25,15 @@ in default configuration.  Then activate/deactivate/add messages in/to
 Just import plugin to gulp file and use it.
 
 ```
-	var i18n = require("gulp-i18n-ui5");
+	const i18n = require("gulp-i18n-ui5");
 
-	var translationFiles = ["webapp/**/*.js", "webapp/manifest.json", "webapp/view/**/*.xml"];
+	var translationFiles = ["webapp/**/*.js", "webapp/manifest.json", "webapp/**/*.xml"];
 
-	return gulp.src(translationFiles)
-		.pipe(i18n("webapp/i18n/i18n.properties"))
-		.pipe(gulp.dest("./"));
+	gulp.task("i18n", function() {
+		return gulp.src(translationFiles)
+			.pipe(i18n("webapp/lang/i18n.properties"))
+			.pipe(gulp.dest("./"));
+	});
 ```
 
 ## Advanced configuration
@@ -47,7 +49,8 @@ Just import plugin to gulp file and use it.
 Example with advanced configuration
 
 ```
-	var i18n = require("gulp-i18n");
+	const i18n = require("gulp-i18n-ui5");
+
 	var configuration = {
 		patterns: [{
 			fileExtensions: ["xml", "html"],
@@ -66,10 +69,12 @@ Example with advanced configuration
 		noDeactivateTokens: []
 	};
 
-	var translationFiles = ["webapp/**/*.js", "webapp/manifest.json", "webapp/view/**/*.xml"];
+	var translationFiles = ["webapp/**/*.js", "webapp/manifest.json", "webapp/**/*.xml"];
 
-	return gulp.src(translationFiles)
-		.pipe(i18n("webapp/i18n/i18n.properties"))
-		.pipe(gulp.dest("./"));
+	gulp.task("i18n", function() {
+		return gulp.src(translationFiles)
+			.pipe(i18n("webapp/lang/i18n.properties"))
+			.pipe(gulp.dest("./"));
+	});
 
 ```
