@@ -1,4 +1,4 @@
-# Plugin gulp-i18n-ui5
+# Plugin gulp-i18n-ui5 [![npm version](https://badge.fury.io/js/gulp-i18n-ui5)](http://badge.fury.io/js/gulp-i18n-ui5)
 
 The plugin is used for simplify work with translations in OpenUI5 or SAPUI5
 framework.  The plugin searches views and source code of project in
@@ -17,7 +17,7 @@ in default configuration.  Then activate/deactivate/add messages in/to
 ## Install
 
 ```
-	npm install gulp-18n-ui5.git
+	npm install gulp-18n-ui5
 ```
 
 ## Usage
