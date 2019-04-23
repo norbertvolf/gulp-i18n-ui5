@@ -1,6 +1,6 @@
 {
   "name": "gulp-i18n-ui5",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "The plugin is used for simplify work with translations in OpenUI5 or SAPUI5 framework.  The plugin searches views and source code of project in OpenUI5 or SAPUI5 framework for translation tokens and automatically update translation file used by the framework.",
   "main": "index.js",
   "scripts": {

@@ -36,7 +36,10 @@ function setup(options) {
 	var defaults = {
 		patterns: [{
 			fileExtensions: ["xml", "html"],
-			pattern: "\\{i18n>([^}]+)\\}"
+			pattern: [
+				"'i18n>([^']+)'",
+				"\\{i18n>([^}]+)\\}"
+			]
 		}, {
 			fileExtensions: ["json"],
 			pattern: "\\{\\{([^}]+)\\}\\}"
@@ -49,7 +52,7 @@ function setup(options) {
 		}],
 		output: {
 			fileName: "webapp/i18n/i18n.properties",
-			pattern: /^(#*)([^= ]+) *= *(.*)/
+			pattern: /^(#*)([^= ]+) *= *([^#]*)(#*)/
 		},
 		noDeactivateTokens: []
 	};
@@ -80,7 +83,8 @@ function i18n(options) {
 	var TOKEN = {
 		UNDEF: 0,
 		INACTIVE: 1,
-		ACTIVE: 2
+		ACTIVE: 2,
+		IGNORE: 3
 	};
 
 	/**
@@ -175,7 +179,9 @@ function i18n(options) {
 				};
 				var match = row.match(config.output.pattern);
 				if (match !== null) {
-					if (match[1] === "#") {
+					if (match[4] === "#") {
+						retval.type = TOKEN.IGNORE
+					} else if (match[1] === "#") {
 						retval.type = TOKEN.INACTIVE;
 					} else {
 						retval.type = TOKEN.ACTIVE;
@@ -207,7 +213,7 @@ function i18n(options) {
 		var tokensToAdd = _.chain(sourceCodeTokens)
 			.filter(function(token) {
 				return _.find(i18nPropertiesFileTokens, function(v) {
-					return (v.type === TOKEN.ACTIVE || v.type === TOKEN.INACTIVE) && v.name === token;
+					return (v.type === TOKEN.IGNORE || v.type === TOKEN.ACTIVE || v.type === TOKEN.INACTIVE) && v.name === token;
 				}) === undefined;
 			})
 			.uniqWith(_.isEqual)

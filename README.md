@@ -78,3 +78,17 @@ Example with advanced configuration
 	});
 
 ```
+
+
+## Ignore translation tokens
+
+If you use external translations and You need just ignore some tokens
+in the translation file Append `#` character to the end of the line.
+
+```
+#XTIT
+INITIAL=Initial
+
+#XTIT
+#EMAIL=Email #Ignore
+```
