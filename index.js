@@ -38,11 +38,15 @@ function setup(options) {
 			fileExtensions: ["xml", "html"],
 			pattern: [
 				"'i18n>([^']+)'",
-				"\\{i18n>([^}]+)\\}"
+				"\\{i18n>([^}]+)\\}",
+				"\\{@i18n>(@[^}]+)\\}"
 			]
 		}, {
 			fileExtensions: ["json"],
-			pattern: "\\{\\{([^}]+)\\}\\}"
+			pattern: [
+				"\\{\\{([^}]+)\\}\\}",
+				"\\{@i18n>([^}]+)\\}"
+			]
 		}, {
 			fileExtensions: ["js"],
 			pattern: [

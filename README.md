@@ -10,6 +10,7 @@ The plugin searches patterns:
   * \_\_("MSGID")
   * getText("MSGID")
   * "{i18n&gt;MSGID}"
+  * "{@i18n&gt;MSGID}"
 
 in default configuration.  Then activate/deactivate/add messages in/to
 `i18n.properties` file which is used for the translations.
